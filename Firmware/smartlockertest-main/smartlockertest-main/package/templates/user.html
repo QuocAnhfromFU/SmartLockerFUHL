@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ thống Smart Locker</title>
+    <style>
+        /* CSS cho giao diện chính */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .menu {
+            background-color: #555;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .menu a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+
+        .menu a:hover {
+            text-decoration: underline;
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* CSS cho menu người dùng */
+        .user-menu {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .user-menu li {
+            margin-right: 30px;
+        }
+
+        .user-menu li:last-child {
+            margin-right: 0;
+        }
+
+        /* CSS cho menu tài khoản con */
+        .user-submenu {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .user-menu:hover .user-submenu {
+            display: block;
+        }
+
+        .user-submenu a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .user-submenu a:hover {
+            background-color: #ddd;
+        }
+
+
+        .menu span {
+            margin-right: 30px;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .action-button {
+            flex: 1;
+            background-color: #f2f2f2;
+            padding: 20px;
+            text-align: center;
+            margin-right: 20px;
+            cursor: pointer;
+        }
+
+        .action-button:last-child {
+            margin-right: 0;
+        }
+        #booking-form {
+    display: none;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Hệ thống Smart Locker</h1>
+    </header>
+    <nav class="menu">
+        <div style="margin-left: auto;">
+            <span><a href=""> Thông báo </a> </span>
+        </div>
+        <div class="user-menu">
+            <span id="user-name"></span>
+            <ul class="user-submenu">
+                <li><a href="#">Thông tin cá nhân</a></li>
+                <li><a href="#">Lịch Sử Đặt Tủ</a></li>
+                <li><a href="{{ url_for('logout') }}">Đăng xuất</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="content">
+        <div class="action-buttons">
+            <div class="action-button">
+                <a href="#" id="booking-button">Bấm để đặt tủ</a>
+            </div>
+            <div class="action-button">
+                <a href="#">Xem lịch sử</a>
+            </div>
+        </div>
+
+        <!-- Giao diện hiện ra khi ta bấm đặt tủ-->
+       <div id="booking-form">
+        <container>
+            <h1>Đặt lịch sử dụng Smart Locker</h1>
+               <form action="/user" method="post">
+                   <div class="form-floating mb-3 mt-3">
+                     <label for="name">Họ và tên:</label>
+                     <input type="name" class="form-control" id="name" placeholder="Enter name" name="name" required>
+                </div>
+                <div class="form-floating mb-3 mt-3">
+                     <label for="mail">Email:</label>
+                     <input type="mail" class="form-control" id="mail" placeholder="Enter email" name="mail" required>
+                </div>
+                <div class="form-floating mb-3 mt-3">
+                      <label for="phone">Số điện thoại:</label>
+                      <input type="tel" class="form-control" id="phone" placeholder="Enter phone" name="phone" required>
+                </div>
+                   <div class="form-floating mb-3 mt-3">
+                     <label for="name1">Họ và tên người nhận:</label>
+                     <input type="name1" class="form-control" id="name1" placeholder="Enter name" name="name1" required>
+                </div>
+                <div class="form-floating mb-3 mt-3">
+                      <label for="phone1">Số điện thoại người nhận:</label>
+                      <input type="tel" class="form-control" id="phone1" placeholder="Enter phone" name="phone1" required>
+                </div>
+                      <label for="start_time">Thời gian đặt:</label>
+                      <input type="datetime-local" id="start_time" name="start_time" required><br><br>
+                      </select><br><br>
+
+
+                  <input type="submit" value="Đặt tủ ">
+              </form>
+        </container>
+    </div>
+
+    <script>
+
+        var user_name = "{{ user_name }}";
+        var userElement = document.getElementById("user-name");
+        userElement.textContent = user_name;
+
+        const bookingButton = document.getElementById("booking-button");
+        const bookingForm = document.getElementById("booking-form");
+
+        bookingButton.addEventListener("click", function(event) {
+            event.preventDefault();
+
+            bookingForm.style.display = "block";
+        });
+    </script>
+ </body>
+</html>

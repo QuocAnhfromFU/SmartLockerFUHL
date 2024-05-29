@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+   <head>
+         <title>lịch sử dùng tủ</title>
+         <meta charset="utf-8">
+         <meta name="viewport" content="width=device-width, initial-scale=1">
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+           <style>
+               body {
+                   font-family: Arial, sans-serif;
+                   margin: 0;
+                   padding: 0;
+               }
+               header {
+                   text-align: center;
+                   padding: 10px;
+               }
+               container {
+                   width: 1200px
+               }
+               footer {
+                  text-align: center;
+                   clear: both;
+                   padding: 10px;
+                   position: fixed;
+                   bottom: 0;
+                   width: 100%;
+               }
+               .scrollable-container {
+                   max-height: 400px;
+                   overflow: auto;
+               }
+               h1{
+               text-align: center;
+               }
+           </style>
+   </head>
+   <body>
+       <header>
+           <div>
+              <nav class="navbar navbar-inverse">
+                 <div class="container-fluid">
+                   <div class="navbar-header">
+                     <a class="navbar-brand" href="#">SMART-LOCKER</a>
+                   </div>
+                   <ul class="nav navbar-nav">
+                       <li><a>Quản lý tài khoản</a></li>
+                       <li><a href="{{ url_for('history') }}">Lịch sử dùng tủ</a></li>
+                       <li><a>Tên tài khoản</a></li>
+
+
+                   </ul>
+                 </div>
+              </nav>
+           </div>
+       </header>
+       <container>
+           <h1 class="center">Lịch sử dùng tủ</h1>
+           <div class="scrollable-container ">
+               <table class="table table-bordered large-table" border="1">
+                   <thead>
+                       <tr>
+                           <th>History ID</th>
+                           <th>User ID</th>
+                           <th>Locker ID</th>
+                           <th>Start Time</th>
+                           <th>End Time</th>
+                       </tr>
+                   </thead>
+                   <tbody>
+                       {% for row in history_data %}
+                       <tr>
+                           <td>{{ row[0] }}</td>
+                           <td>{{ row[1] }}</td>
+                           <td>{{ row[2] }}</td>
+                           <td>{{ row[3] }}</td>
+                           <td>{{ row[4] }}</td>
+                       </tr>
+                       {% endfor %}
+                   </tbody>
+               </table>
+           </div>
+       </container>
+   </body>
+</html>
